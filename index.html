@@ -1,3 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Ultimate Valentine Surprise</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" autoplay loop></audio>
+
+<!-- Page 1 -->
+<div id="page1" class="page">
+  <div class="text">Hey love, do you want to see what is waiting for you?</div>
+  <button id="startBtn" class="btn hidden">Yes ❤️</button>
+</div>
+
+<!-- Page 2 -->
+<div id="page2" class="page hidden">
+  <img src="https://media.giphy.com/media/HJibfnd7xqk5hAMD4v/giphy.gif" class="cat-gif">
+  <div class="text">Are you sure?</div>
+  <button id="catYes" class="btn">Yes 💕</button>
+  <button id="catNo" class="btn">No 😿</button>
+</div>
+
 <!-- Page 2b -->
 <div id="page2b" class="page hidden">
   <img src="https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif" class="cat-gif">
@@ -41,52 +67,6 @@
   <button class="btn">Claim it 💍</button>
 </div>
 
-<script>
-setTimeout(()=>{ document.getElementById('startBtn').classList.remove('hidden'); },1500);
-
-const showPage=id=>{ document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
-
-document.getElementById('startBtn').onclick = ()=>showPage('page2');
-document.getElementById('catYes').onclick = ()=>showPage('page3');
-document.getElementById('catNo').onclick = ()=>showPage('page2b');
-document.getElementById('makeHappy').onclick = ()=>showPage('page3');
-
-// Envelope flap
-const envelope=document.getElementById('envelope');
-const openLetterBtn=document.getElementById('openLetter');
-openLetterBtn.onclick = ()=>{
-  envelope.classList.add('open');
-  setTimeout(()=>showPage('page4'),800);
-}
-
-// Heart tap floating hearts
-document.getElementById('heartTap').onclick = ()=>{
-  showPage('page5');
-  for(let i=0;i<15;i++){
-    let h=document.createElement('div');
-    h.className='heart-float';
-    h.style.left=(Math.random()*60+20)+'%';
-    h.style.top='80%';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),2000);
-  }
-}
-
-// Valentine buttons
-document.getElementById('valYes').onclick = ()=>showPage('page6');
-document.getElementById('valNo').onclick = ()=>alert("Oh no! 😿 The cat is sad!");
-
-// Confetti on final page
-function confettiFall(){
-  if(document.getElementById('page6').classList.contains('hidden')) return;
-  let c=document.createElement('div'); c.className='confetti';
-  c.style.left=Math.random()*100+'vw';
-  c.style.background=hsl(${Math.random()*360},100%,50%);
-  document.body.appendChild(c);
-  setTimeout(()=>c.remove(),3000);
-  requestAnimationFrame(confettiFall);
-}
-confettiFall();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
