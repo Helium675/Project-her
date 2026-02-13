@@ -1,0 +1,92 @@
+<!-- Page 2b -->
+<div id="page2b" class="page hidden">
+  <img src="https://media.giphy.com/media/14uQ3cOFteDaU/giphy.gif" class="cat-gif">
+  <div class="text">Oh no! The cat is sad 😢 Tap yes to make him smile</div>
+  <button id="makeHappy" class="btn">Yes 😊</button>
+</div>
+
+<!-- Page 3: Envelope -->
+<div id="page3" class="page hidden">
+  <div class="envelope-container" id="envelopeContainer">
+    <div class="envelope" id="envelope"></div>
+  </div>
+  <button id="openLetter" class="btn">Open Letter ✂️</button>
+</div>
+
+<!-- Page 4: Letter -->
+<div id="page4" class="page hidden">
+  <div class="letter-container">
+    <div id="letter" class="letter">
+      <p style="font-size:1.3rem; font-weight:bold;">To my ❤️</p>
+      <p>You are the sparkle in my eyes, the beat of my heart...</p>
+      <p>(Your letter text here 📝)</p>
+      <div class="flower">🌹</div>
+    </div>
+  </div>
+  <div class="heart-final" id="heartTap">❤️ Tap me</div>
+</div>
+
+<!-- Page 5 -->
+<div id="page5" class="page hidden">
+  <img src="https://media.giphy.com/media/UsJZ7oG1bZVn2/giphy.gif" class="cat-gif">
+  <div class="text">Would you like to be my Valentine?</div>
+  <button id="valYes" class="btn">Yes 💖</button>
+  <button id="valNo" class="btn">No 😢</button>
+</div>
+
+<!-- Page 6 -->
+<div id="page6" class="page hidden">
+  <div class="text">Congratulations my love! 💕</div>
+  <img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" class="cute-gif">
+  <button class="btn">Claim it 💍</button>
+</div>
+
+<script>
+setTimeout(()=>{ document.getElementById('startBtn').classList.remove('hidden'); },1500);
+
+const showPage=id=>{ document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); }
+
+document.getElementById('startBtn').onclick = ()=>showPage('page2');
+document.getElementById('catYes').onclick = ()=>showPage('page3');
+document.getElementById('catNo').onclick = ()=>showPage('page2b');
+document.getElementById('makeHappy').onclick = ()=>showPage('page3');
+
+// Envelope flap
+const envelope=document.getElementById('envelope');
+const openLetterBtn=document.getElementById('openLetter');
+openLetterBtn.onclick = ()=>{
+  envelope.classList.add('open');
+  setTimeout(()=>showPage('page4'),800);
+}
+
+// Heart tap floating hearts
+document.getElementById('heartTap').onclick = ()=>{
+  showPage('page5');
+  for(let i=0;i<15;i++){
+    let h=document.createElement('div');
+    h.className='heart-float';
+    h.style.left=(Math.random()*60+20)+'%';
+    h.style.top='80%';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),2000);
+  }
+}
+
+// Valentine buttons
+document.getElementById('valYes').onclick = ()=>showPage('page6');
+document.getElementById('valNo').onclick = ()=>alert("Oh no! 😿 The cat is sad!");
+
+// Confetti on final page
+function confettiFall(){
+  if(document.getElementById('page6').classList.contains('hidden')) return;
+  let c=document.createElement('div'); c.className='confetti';
+  c.style.left=Math.random()*100+'vw';
+  c.style.background=hsl(${Math.random()*360},100%,50%);
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),3000);
+  requestAnimationFrame(confettiFall);
+}
+confettiFall();
+</script>
+</body>
+</html>
